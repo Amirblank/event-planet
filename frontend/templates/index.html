@@ -1,0 +1,50 @@
+{% load static %}<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Event Planet</title>
+  <meta name="description" content="Publish events, take registrations, run multi-stage schedules and share results.">
+  <meta name="color-scheme" content="light dark">
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='8' fill='%23212529'/%3E%3Ccircle cx='16' cy='16' r='7' fill='%23e9ecef'/%3E%3Cellipse cx='16' cy='16' rx='13' ry='3.4' fill='none' stroke='%23e9ecef' stroke-width='2' transform='rotate(-24 16 16)'/%3E%3C/svg%3E">
+  <link rel="stylesheet" href="{% static 'vendor/phosphor/style.css' %}">
+  <link rel="stylesheet" href="{% static 'css/tokens.css' %}">
+  <link rel="stylesheet" href="{% static 'css/app.css' %}">
+  <script>
+    try {
+      var saved = localStorage.getItem("ep.theme");
+      if (saved === "light" || saved === "dark") document.documentElement.dataset.theme = saved;
+    } catch (error) {}
+  </script>
+</head>
+<body>
+  <div class="ambient" aria-hidden="true"><span></span><span></span><span></span></div>
+  <a class="skip-link" href="#main">Skip to content</a>
+
+  <header class="nav-wrap">
+    <nav class="nav glass" aria-label="Main">
+      <a class="brand" href="#/">
+        <span class="brand__mark" aria-hidden="true"></span>
+        <span class="brand__name">Event Planet</span>
+      </a>
+      <div class="nav__links" data-nav-links></div>
+      <div class="nav__actions" data-nav-actions></div>
+    </nav>
+  </header>
+
+  <main id="main" tabindex="-1"></main>
+
+  <footer class="footer">
+    <div class="footer__inner">
+      <a class="brand" href="#/">
+        <span class="brand__mark" aria-hidden="true"></span>
+        <span class="brand__name">Event Planet</span>
+      </a>
+    </div>
+  </footer>
+
+  <div class="toasts" aria-live="polite" aria-atomic="false"></div>
+  <noscript><p class="noscript">This interface needs JavaScript.</p></noscript>
+  <script type="module" src="{% static 'js/app.js' %}"></script>
+</body>
+</html>

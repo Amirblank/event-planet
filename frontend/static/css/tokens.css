@@ -1,0 +1,167 @@
+/*
+ * Design tokens for Event Planet.
+ *
+ * Palette: two brand colors only, #E9ECEF and #212529. They swap roles in dark
+ * mode. The pastel pairs are semantic and used for lifecycle states alone.
+ *
+ * Shape rule: controls (buttons, inputs, segmented) 12px, surfaces (cards,
+ * panels, nav, dialogs) 20px, tags and chips fully round.
+ *
+ * Layers: --z-nav for the sticky bar, --z-toast for toasts. Dialogs use the
+ * browser's top layer and need no z-index.
+ */
+
+/* Fallback face, self-hosted. License: fonts/Geist-LICENSE.txt (SIL OFL). */
+@font-face {
+  font-family: "Geist";
+  src: url("../fonts/Geist-Variable.woff2") format("woff2");
+  font-weight: 100 900;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "Geist Mono";
+  src: url("../fonts/GeistMono-Variable.woff2") format("woff2");
+  font-weight: 100 900;
+  font-style: normal;
+  font-display: swap;
+}
+
+/*
+ * Givonic is the primary typeface. It is a commercial font and is not shipped
+ * with this repository. A locally installed copy is picked up automatically.
+ * To self-host it, drop the licensed files into static/fonts/ and enable:
+ *
+ * @font-face {
+ *   font-family: "Givonic";
+ *   src: url("../fonts/Givonic-Variable.woff2") format("woff2");
+ *   font-weight: 100 900;
+ *   font-display: swap;
+ * }
+ */
+
+:root {
+  color-scheme: light;
+
+  --font-sans: "Givonic", "Geist", "Segoe UI Variable Text", "Helvetica Neue", system-ui, sans-serif;
+  --font-mono: "Geist Mono", ui-monospace, "SF Mono", Consolas, monospace;
+
+  --bg: #e9ecef;
+  --ink: #212529;
+  --bg-rgb: 233 236 239;
+  --ink-rgb: 33 37 41;
+  --muted: #555b62;
+
+  --line: rgb(var(--ink-rgb) / 0.1);
+  --line-strong: rgb(var(--ink-rgb) / 0.2);
+
+  --glass: rgb(255 255 255 / 0.46);
+  --glass-border: rgb(255 255 255 / 0.78);
+  --glass-shadow: inset 0 1px 0 rgb(255 255 255 / 0.7), 0 14px 44px rgb(var(--ink-rgb) / 0.08);
+  --glass-shadow-hover: inset 0 1px 0 rgb(255 255 255 / 0.7), 0 22px 60px rgb(var(--ink-rgb) / 0.13);
+  --surface-solid: #f4f6f8;
+  --modal-bg: rgb(244 246 248 / 0.88);
+  --scrim: rgb(33 37 41 / 0.34);
+
+  --field: rgb(255 255 255 / 0.62);
+  --field-border: rgb(var(--ink-rgb) / 0.42);
+
+  --blob-1: rgb(255 255 255 / 0.95);
+  --blob-2: rgb(173 181 189 / 0.5);
+  --blob-3: rgb(206 212 218 / 0.85);
+
+  --draft-bg: #fbf3db;
+  --draft-fg: #7a5200;
+  --published-bg: #e3f1e2;
+  --published-fg: #2c5a31;
+  --closed-bg: #fde6e7;
+  --closed-fg: #942a28;
+  --finished-bg: #dcf0fd;
+  --finished-fg: #1a5f8d;
+  --danger: #a12b29;
+
+  --r-control: 12px;
+  --r-surface: 20px;
+  --r-round: 999px;
+
+  --max: 1200px;
+  --gutter: clamp(16px, 4vw, 32px);
+  --ease: cubic-bezier(0.16, 1, 0.3, 1);
+
+  --z-nav: 20;
+  --z-toast: 40;
+}
+
+:root[data-theme="dark"] {
+  color-scheme: dark;
+
+  --bg: #212529;
+  --ink: #e9ecef;
+  --bg-rgb: 33 37 41;
+  --ink-rgb: 233 236 239;
+  --muted: #aab1b8;
+
+  --glass: rgb(233 236 239 / 0.06);
+  --glass-border: rgb(233 236 239 / 0.14);
+  --glass-shadow: inset 0 1px 0 rgb(255 255 255 / 0.08), 0 16px 48px rgb(0 0 0 / 0.32);
+  --glass-shadow-hover: inset 0 1px 0 rgb(255 255 255 / 0.1), 0 24px 64px rgb(0 0 0 / 0.45);
+  --surface-solid: #2b3035;
+  --modal-bg: rgb(43 48 53 / 0.9);
+  --scrim: rgb(0 0 0 / 0.55);
+
+  --field: rgb(233 236 239 / 0.07);
+  --field-border: rgb(var(--ink-rgb) / 0.4);
+
+  --blob-1: rgb(73 80 87 / 0.6);
+  --blob-2: rgb(108 117 125 / 0.26);
+  --blob-3: rgb(52 58 64 / 0.9);
+
+  --draft-bg: #3b3113;
+  --draft-fg: #f1d37e;
+  --published-bg: #1d3221;
+  --published-fg: #a9d7ae;
+  --closed-bg: #3e1f20;
+  --closed-fg: #f2aaa9;
+  --finished-bg: #15303f;
+  --finished-fg: #a0d1f3;
+  --danger: #f2aaa9;
+}
+
+/* Same values as above, applied when the visitor has not chosen a theme. */
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    color-scheme: dark;
+
+    --bg: #212529;
+    --ink: #e9ecef;
+    --bg-rgb: 33 37 41;
+    --ink-rgb: 233 236 239;
+    --muted: #aab1b8;
+
+    --glass: rgb(233 236 239 / 0.06);
+    --glass-border: rgb(233 236 239 / 0.14);
+    --glass-shadow: inset 0 1px 0 rgb(255 255 255 / 0.08), 0 16px 48px rgb(0 0 0 / 0.32);
+    --glass-shadow-hover: inset 0 1px 0 rgb(255 255 255 / 0.1), 0 24px 64px rgb(0 0 0 / 0.45);
+    --surface-solid: #2b3035;
+    --modal-bg: rgb(43 48 53 / 0.9);
+    --scrim: rgb(0 0 0 / 0.55);
+
+    --field: rgb(233 236 239 / 0.07);
+    --field-border: rgb(var(--ink-rgb) / 0.4);
+
+    --blob-1: rgb(73 80 87 / 0.6);
+    --blob-2: rgb(108 117 125 / 0.26);
+    --blob-3: rgb(52 58 64 / 0.9);
+
+    --draft-bg: #3b3113;
+    --draft-fg: #f1d37e;
+    --published-bg: #1d3221;
+    --published-fg: #a9d7ae;
+    --closed-bg: #3e1f20;
+    --closed-fg: #f2aaa9;
+    --finished-bg: #15303f;
+    --finished-fg: #a0d1f3;
+    --danger: #f2aaa9;
+  }
+}
